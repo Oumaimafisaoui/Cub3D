@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 18:43:56 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:19:08 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void make_rays(t_all *cub)
     cub->var_d.new_angle = cub->player.ang - (FEILD / 2);
     while(i < NUM_RAYS)
     {
-        // printf("%d\n", NUM_RAYS);
-        // printf("::%d %d\n", W_M , CUBE);
         cub->var_d.x1 = cub->player.x + (cos(cub->var_d.new_angle) * VIEW);
         cub->var_d.y1 = cub->player.y + (sin(cub->var_d.new_angle) * VIEW);
 

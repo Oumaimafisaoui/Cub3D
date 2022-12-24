@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 18:51:07 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:25:05 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int check_walls1(t_all *cub, int flag);
 void	my_mlx_pixel_put2(t_all *cub, int x, int y, int color);
 void init2(t_all *cub);
 void make_rays(t_all *cub);
+
 /*Cub3d outils*/
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);

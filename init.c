@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 18:49:49 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:26:05 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void init(t_all *cub)
     cub->endian = 0;
     cub->player.x = 0;
     cub->player.y = 0;
-    // cub->player = NULL;
     cub->player.ang = M_PI;
     cub->player.speed = 4;
     cub->player.rotation_speed = 3 * (M_PI / 180); //3 degree per frame it is in radian
     cub->player.turn_direction = 0; // -1 OR 1
     cub->player.walk_direction = 0;
-    cub->var_d.x1 = 0;
+    cub->var_d.x1 = 0; 
     cub->var_d.y1 = 0;
     cub->var_d.xx1 = 0;
     cub->var_d.yy1 = 0;
@@ -85,6 +84,7 @@ void launch_mlx(t_all *cub)
     dda(cub);
     mlx_hook(cub->mlx_win, 2, 1L<<0 , mouvements, cub);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);
+    mlx_hook(cub->mlx_win, 17, 0, exit_program, cub);
 	mlx_loop(cub->mlx);
 }
 
