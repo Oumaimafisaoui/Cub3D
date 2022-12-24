@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 16:31:39 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 16:59:35 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ void dda2(t_all *cub)
 
 
 
-// void make_raysI(t_all *cub)
-// {
-//     int i = 0;
+void make_raysI(t_all *cub)
+{
+    int i = 0;
     
-//     while(i < NUM_RAYS)
-//     {
-        
-//     }
-// }
+    while(i < NUM_RAYS)
+    {
+        cub->var_d.new_angle = 
+    }
+}
