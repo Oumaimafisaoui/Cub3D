@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:27:59 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 11:12:25 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 18:49:46 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ int	mouvements(int key, t_all *cub)
 	// mlx_clear_window(cub->mlx, cub->mlx_win);
     draw_minimap(cub);
     big_circle(cub);
+    make_rays(cub);
     dda(cub);
     // dda2(cub);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);

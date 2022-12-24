@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 16:37:31 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 18:51:07 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,18 @@
 #include <stdio.h>
 #include "parsing/cub3d.h"
 
-#define CUBE  20
+#define CUBE  50
 #define W_M 10
 #define H_M 7
-#define VIEW  300 //length of ray
+#define VIEW  40 //length of ray
 #define FEILD 60 * (M_PI / 180) //convert in RAD
-#define W_STRIP 1
-#define NUM_RAYS (W_M * CUBE) / W_STRIP //
+#define NUM_RAYS (W_M * CUBE) //
 
 #define UP  126
 #define DOWN 125
 #define RIGHT 124
 #define LEFT 123
 
-// char walls[7][10] = {
-//     {'1','1','1','1','1','1','1','1','1','1'}, 
-//     {'1','0','0','0','0','0','0','0','0','1'}, 
-//     {'1','0','0','0','0','N','0','0','0','1'}, 
-//     {'1','0','0','0','0','0','0','0','0','1'}, 
-//     {'1','0','0','0','0','0','0','0','0','1'}, 
-//     {'1','0','0','0','0','0','0','0','0','1'}, 
-//     {'1','1','1','1','1','1','1','1','1','1'},   
-// };
 
 typedef struct s_player
 {
@@ -54,6 +44,7 @@ typedef struct s_player
     double turn_direction;
     double walk_direction;
     double rotation_speed;
+    double view;
     
 }t_player;
 
@@ -67,6 +58,8 @@ typedef struct s_ddavar
     double yinc;
     int steps;
     double  new_angle;
+    double dx;
+    double dy;
 
 } t_ddavar;
 
@@ -106,10 +99,10 @@ int check_walls2(t_all *cub, int flag);
 int check_walls1(t_all *cub, int flag);
 void	my_mlx_pixel_put2(t_all *cub, int x, int y, int color);
 void init2(t_all *cub);
-
+void make_rays(t_all *cub);
 /*Cub3d outils*/
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
-
+void dda2(t_all *cub);
 void big_circle(t_all *cub);
 #endif

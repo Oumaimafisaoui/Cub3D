@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 16:58:51 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 18:49:49 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,9 @@ void init(t_all *cub)
     cub->var_d.xinc = 0;
     cub->var_d.yinc = 0;
     cub->var_d.steps = 0;
-    // char walls[7][10] = {
-    // {'1','1','1','1','1','1','1','1','1',' '}, 
-    // {'1','0','0','0','0','0','0','0','1',' '}, 
-    // {'1','0','0','0','0','N','0','0','1',' '}, 
-    // {'1','0','0','1','0','0','1','0','1','1'}, 
-    // {'1','0','1','0','0','0','0','1','0','1'}, 
-    // {'1','0','0','0','0','0','0','0','0','1'}, 
-    // {'1','1','1','1','1','1','1','1','1','1'},   
-    // };
-    // for (int i = 0; i < 7; i++) {
-    //     for (int j = 0; j < 10; j++) 
-    //     {
-    //         cub->walls[i][j] = walls[i][j];
-    //     }
-    // }
+    cub->var_d.dx = 0;
+    cub->var_d.dy = 0;
+    cub->player.view = FEILD;
 }
 
 void set_direction(t_all *cub)
@@ -93,9 +81,8 @@ void launch_mlx(t_all *cub)
     put_player(cub);
     big_circle(cub);
     set_direction(cub);
-    dda(cub);
     make_rays(cub);
-    // dda2(cub);
+    dda(cub);
     mlx_hook(cub->mlx_win, 2, 1L<<0 , mouvements, cub);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);
 	mlx_loop(cub->mlx);
