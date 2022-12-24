@@ -30,15 +30,15 @@ Parsing the map elements:
 2 - 
 3 - 
 ### Execution:
-2 - Initializing an instance of window using mlx and putting a mini map image in the window.
-3 - Creating the grid for the mini map to distinguish the walls, floor and player.
-4 - Putting the player on the mini map as an amplified circle.
-5 - Moving the player using mlx hook function.
-6 - Create the hook's events directions.
-7 - Create the direction line using DDA algorithm.
-8 - Creating the rotation algorithm.
-9 - Defining the walls limits to not go through the walls.
-10 - launch the rays.
-[ X ] - Define the intersection with the walls.
-[ X ] - cast the rays.
-[ X ] - 3D / Textures.
+2 - Initializing an instance of window using mlx and putting a mini map image in the window. <br>
+3 - Creating the grid for the mini map to distinguish the walls, floor and player.<br>
+4 - Putting the player on the mini map as an amplified circle.<br>
+5 - Moving the player using mlx hook function.<br>
+6 - Create the hook's events directions.<br>
+7 - Create the direction line using DDA algorithm.<br>
+8 - Creating the rotation algorithm.<br>
+9 - Defining the walls limits to not go through the walls.<br>
+10 - launch the rays.<br>
+[ X ] - Define the intersection with the walls.<br>
+[ X ] - cast the rays.<br>
+[ X ] - 3D / Textures.<br>
