@@ -6,12 +6,11 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:37 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 16:23:56 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:30:22 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-
 
 int main(int ac, char **av)
 {
@@ -42,6 +41,4 @@ int main(int ac, char **av)
     cub.map_h = map.map_height * CUBE;
     init(&cub);
     launch_mlx(&cub);
-
-
 } 

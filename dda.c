@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 19:19:08 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:37:30 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include <stdio.h>
 /*
     this function calclates the position of the end of the ray,
+    This is the function for the red line
+
 */
 void dda(t_all *cub)
 {
@@ -42,6 +44,13 @@ void dda(t_all *cub)
     
 }
 
+
+/*
+    this fuction draw a ray in finction of the parameters:
+    @var_d.xinc : the x increment value
+    @
+
+*/
 void dda2(t_all *cub)
 {
     //why pi / 2 looks down : becaue they go in the way of the horloge in game development

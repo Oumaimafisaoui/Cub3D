@@ -6,12 +6,16 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 13:49:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 13:30:32 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/24 19:35:11 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
+
+/*
+    This function checks if a wall is there to no go through it
+*/
 int check_walls1(t_all *cub, int flag)
 {
     int	x;
@@ -44,6 +48,10 @@ int check_walls1(t_all *cub, int flag)
     return (1);
 }
 
+
+/*
+    This function checks if a wall is there to no go through it
+*/
 
 int check_walls2(t_all *cub, int flag)
 {

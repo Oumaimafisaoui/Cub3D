@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 19:26:05 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 12:10:35 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ void init(t_all *cub)
     cub->var_d.dx = 0;
     cub->var_d.dy = 0;
     cub->player.view = FEILD;
+    cub->map_i = 0;
+    cub->map_j = 0;
+    cub->map_x = 0;
+    cub->map_y = 0;
+    cub->black = 0x00000000;
+    cub->yellow = 0x00FFFF00;
+    cub->red = 0x00FF3333;
+    cub->purple = 0x009966FF;
 }
 
 void set_direction(t_all *cub)
