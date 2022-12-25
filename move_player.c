@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:27:59 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 18:49:46 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 13:27:41 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	mouvements(int key, t_all *cub)
 		event_left_right(cub, key);
 	else if (key == UP || key == DOWN)
 		event_up_down(cub, key);
+    else if (key == 53)
+		exit_program(cub);
     else
         rotate_player(key, cub);
 	// else if (key == 53)

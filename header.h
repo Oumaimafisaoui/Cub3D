@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/25 13:14:45 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 13:29:43 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@
 #include <stdio.h>
 #include "parsing/cub3d.h"
 
-#define CUBE  50
-#define W_M 10
-#define H_M 7
+#define CUBE  60 // the cube dimension
+#define W_M 10 //map width
+#define H_M 7 //map height
 #define VIEW  40 //length of ray
 #define FEILD 60 * (M_PI / 180) //convert in RAD
 #define NUM_RAYS (W_M * CUBE) //
 
-#define UP  126
-#define DOWN 125
-#define RIGHT 124
-#define LEFT 123
+#define UP  13
+#define DOWN 1
+#define RIGHT 2
+#define LEFT 0
 
 
 typedef struct s_player
@@ -77,6 +77,7 @@ typedef struct s_cub
     t_player player;
     char **walls;
     t_ddavar var_d;
+
     //for the minimap
     int map_i;
     int map_j;

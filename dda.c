@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 19:37:30 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 13:27:16 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void make_rays(t_all *cub)
 
         cub->var_d.xx1 = cub->player.x;
         cub->var_d.yy1 =  cub->player.y;
+
         cub->var_d.dx = cub->var_d.x1 - cub->var_d.xx1;
         cub->var_d.dy = cub->var_d.y1 - cub->var_d.yy1;
 

@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:58:11 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/25 13:15:09 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 13:22:19 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	my_mlx_pixel_put2(t_all *cub, int x, int y, int color)
 
     y = 0 => (x =0 ............. x = 60)
 
-
         x= 0    60    90
     y = 0---------------------------------------
            1|   1 |   1  |   1  |   1  |  1   |   1  |
@@ -57,8 +56,7 @@ void	my_mlx_pixel_put2(t_all *cub, int x, int y, int color)
     Round one => (y=0 , (x= 0 .......... x = 60))
     (y = 0 => y < 60)
     (x = 0 = >  x < 60)
-
-
+    the step is 60 and the pixel is one.
 */
 
 void draw_grid(t_all *cub, int grid, int fill)
@@ -109,6 +107,7 @@ void draw_minimap(t_all *cub)
     cub->map_j = 0;  //to prevent duplication
     cub->map_x = 0;
     cub->map_y = 0;
+    return ;
 }
 
 
