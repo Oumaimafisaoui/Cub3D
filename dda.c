@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/28 13:20:01 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/28 14:07:40 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,31 +92,39 @@ void make_rays(t_all *cub)
         xnext = cub->var_d.xinter;
         ynext = cub->var_d.yinter;
 
-        if(cub->var_d.is_up)
-            ynext--;
+        if(cub->var_d.is_up == 1)
+            ynext -= 1;
 
-        // while(xnext >= 0 && xnext <= cub->map_w && ynext >= 0 && ynext <= cub->map_h)
-        // {
-        //     if(cub->walls[ynext][xnext] == '1')
-        //     {
-        //         cub->var_d.h_found_wall = 1;
-        //         cub->var_d.wallhitx = xnext;
-        //         cub->var_d.wallhity = ynext;
-        //         break ;
-        //     }
-        //     else
-        //     {
-        //         xnext += cub->var_d.xsteps;
-        //         ynext += cub->var_d.ysteps;
-        //     }
-        // }
+        while(true)
+        {
+            if(cub->walls[ynext / CUBE][xnext / CUBE] == '1')
+            {
+                cub->var_d.h_found_wall = 1;
+                cub->var_d.wallhitx = xnext;
+                cub->var_d.wallhity = ynext;
+                
+                break ;
+            }
+            else
+            {
+                xnext += cub->var_d.xsteps;
+                ynext += cub->var_d.ysteps;
+            }
+        }
         printf("is up : %d %f\n", cub->var_d.is_up, cub->player.ang);
         printf("is down : %d %f\n", cub->var_d.is_down, cub->player.ang);
         printf("is LEFT : %d %f\n", cub->var_d.is_left, cub->player.ang);
         printf("is RIGHT : %d %f\n", cub->var_d.is_right, cub->player.ang);
         
-        cub->var_d.x1 = cub->player.x + (cos(cub->var_d.new_angle) * VIEW);
-        cub->var_d.y1 = cub->player.y + (sin(cub->var_d.new_angle) * VIEW);
+        if(cub->var_d.h_found_wall == 0)
+        {
+            cub->var_d.x1 = cub->player.x + (cos(cub->var_d.new_angle) * VIEW);
+            cub->var_d.y1 = cub->player.y + (sin(cub->var_d.new_angle) * VIEW);
+        }
+        else{
+            cub->var_d.x1 = cub->var_d.wallhitx;
+            cub->var_d.y1 = cub->var_d.wallhity;
+        }
 
         cub->var_d.xx1 = cub->player.x;
         cub->var_d.yy1 =  cub->player.y;
@@ -141,33 +149,32 @@ void make_rays(t_all *cub)
 
 void what_direction(t_all *cub)
 {
-    if(cub->var_d.new_angle > 0 && cub->var_d.new_angle < M_PI)
+    if(cub->var_d.new_angle >= 0 && cub->var_d.new_angle <= M_PI)
     {
         cub->var_d.is_up = 0;
         cub->var_d.is_down = 1;
-    }
-    else
-    {
-        cub->var_d.is_down = 0;
-        cub->var_d.is_up = 1;
-    }
-    what_direction1(cub);
-}
-
-
-void what_direction1(t_all *cub)
-{
-    if ((cub->var_d.new_angle < M_PI * 0.5) || (cub->var_d.new_angle > 1.5 * M_PI))
-    {
-        cub->var_d.is_left = 0;
-        cub->var_d.is_right = 1;
-    }
-    else
-    {
         cub->var_d.is_right = 0;
         cub->var_d.is_left = 1;
+        if(cub->var_d.new_angle <= M_PI / 2)
+        {
+            cub->var_d.is_right = 1;
+            cub->var_d.is_left = 0;
+        }
+    }
+    else if(cub->var_d.new_angle > M_PI)
+    {
+        cub->var_d.is_up = 1;
+        cub->var_d.is_down = 0;
+        cub->var_d.is_right = 1;
+        cub->var_d.is_left = 0;
+        if(cub->var_d.new_angle <= (3 * M_PI) / 2)
+        {
+            cub->var_d.is_right = 0;
+            cub->var_d.is_left = 1;
+        }
     }
 }
+  
 void fix_angle(t_all *cub)
 {
     if (cub->var_d.new_angle > 2 * M_PI)
