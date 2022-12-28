@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/28 11:40:07 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/28 13:20:01 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void dda2(t_all *cub)
 void make_rays(t_all *cub)
 {
     int i = 0;
+
+    int xnext = 0;
+    int ynext = 0;
     
     cub->var_d.new_angle = cub->player.ang - (FEILD / 2);
     while(i < NUM_RAYS)
@@ -78,13 +81,35 @@ void make_rays(t_all *cub)
         //Find the y and x horizental intersept
         what_direction(cub);
         cub->var_d.yinter = round(cub->player.y / CUBE) * CUBE;
-        // is_down(cub);
+        is_down(cub);
         cub->var_d.xinter = cub->player.x + ((cub->player.y - cub->var_d.yinter) / tan(cub->var_d.new_angle));
         //get the xsteps adn the ysteps
         cub->var_d.ysteps = CUBE;
-        // is_up(cub);
+        is_up(cub);
         cub->var_d.xsteps = cub->var_d.ysteps / tan(cub->var_d.new_angle);
-        // is_left(cub);
+        is_left(cub);
+        
+        xnext = cub->var_d.xinter;
+        ynext = cub->var_d.yinter;
+
+        if(cub->var_d.is_up)
+            ynext--;
+
+        // while(xnext >= 0 && xnext <= cub->map_w && ynext >= 0 && ynext <= cub->map_h)
+        // {
+        //     if(cub->walls[ynext][xnext] == '1')
+        //     {
+        //         cub->var_d.h_found_wall = 1;
+        //         cub->var_d.wallhitx = xnext;
+        //         cub->var_d.wallhity = ynext;
+        //         break ;
+        //     }
+        //     else
+        //     {
+        //         xnext += cub->var_d.xsteps;
+        //         ynext += cub->var_d.ysteps;
+        //     }
+        // }
         printf("is up : %d %f\n", cub->var_d.is_up, cub->player.ang);
         printf("is down : %d %f\n", cub->var_d.is_down, cub->player.ang);
         printf("is LEFT : %d %f\n", cub->var_d.is_left, cub->player.ang);
@@ -121,30 +146,28 @@ void what_direction(t_all *cub)
         cub->var_d.is_up = 0;
         cub->var_d.is_down = 1;
     }
-    else if (cub->var_d.new_angle < 0 && cub->var_d.new_angle > M_PI)
+    else
     {
         cub->var_d.is_down = 0;
         cub->var_d.is_up = 1;
     }
-    else if ((cub->var_d.new_angle < M_PI * 0.5) || (cub->var_d.new_angle > 1.5 * M_PI))
+    what_direction1(cub);
+}
+
+
+void what_direction1(t_all *cub)
+{
+    if ((cub->var_d.new_angle < M_PI * 0.5) || (cub->var_d.new_angle > 1.5 * M_PI))
     {
         cub->var_d.is_left = 0;
         cub->var_d.is_right = 1;
     }
-    else if((cub->var_d.new_angle >  M_PI * 0.5) || (cub->var_d.new_angle <  1.5 * M_PI))
+    else
     {
         cub->var_d.is_right = 0;
         cub->var_d.is_left = 1;
     }
-    else
-    {
-        cub->var_d.is_down *= 1;
-        cub->var_d.is_right *= 1;
-        cub->var_d.is_left *= 1;
-        cub->var_d.is_up *= 1;
-    }
 }
-
 void fix_angle(t_all *cub)
 {
     if (cub->var_d.new_angle > 2 * M_PI)

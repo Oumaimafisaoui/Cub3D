@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/28 11:38:24 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:51:04 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void init(t_all *cub)
     cub->var_d.wallhitx = 0;
     cub->var_d.wallhity = 0;
     cub->var_d.distance = 0;
+    cub->var_d.h_found_wall = 0;
 }
 
 void set_direction(t_all *cub)
