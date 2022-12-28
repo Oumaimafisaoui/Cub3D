@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/25 12:10:35 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:38:24 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,25 @@ void init(t_all *cub)
     cub->map_j = 0;
     cub->map_x = 0;
     cub->map_y = 0;
+
     cub->black = 0x00000000;
     cub->yellow = 0x00FFFF00;
     cub->red = 0x00FF3333;
     cub->purple = 0x009966FF;
+
+    cub->var_d.xsteps = 0;
+    cub->var_d.ysteps = 0;
+    cub->var_d.xinter = 0;
+    cub->var_d.yinter = 0;
+    
+    cub->var_d.is_down = 0; 
+    cub->var_d.is_up = 0;
+    cub->var_d.is_right = 0;
+    cub->var_d.is_left = 0;
+
+    cub->var_d.wallhitx = 0;
+    cub->var_d.wallhity = 0;
+    cub->var_d.distance = 0;
 }
 
 void set_direction(t_all *cub)
@@ -95,7 +110,6 @@ void launch_mlx(t_all *cub)
     mlx_hook(cub->mlx_win, 17, 0, exit_program, cub);
 	mlx_loop(cub->mlx);
 }
-
 
 void	ft_error(char *str)
 {

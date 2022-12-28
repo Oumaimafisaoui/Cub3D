@@ -6,28 +6,12 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:27:59 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/25 13:27:41 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/25 18:01:12 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 #include <stdio.h>
-// int	exit_program (t_all *cub)
-// {
-//     //free the map
-// 	// int	index;
-
-// 	// index = 0;
-// 	if (cub->mlx_win)
-// 		mlx_destroy_window(cub->mlx, cub->mlx_win);
-// 	// while (index < cub->)
-// 	// {
-// 	// 	free(cub->wall[index]);
-// 	// 	index++;
-// 	// }
-// 	// free(cub->walls);
-// 	exit(0);
-// }
 
 void event_left_right(t_all *cub, int key)
 {
@@ -52,7 +36,6 @@ void event_left_right(t_all *cub, int key)
         }
     }
 }
-
 
 
 void event_up_down(t_all *cub, int key)
@@ -86,11 +69,14 @@ void rotate_player(int key, t_all *cub)
     {
         cub->player.ang += cub->player.rotation_speed;
     }
-
+    if (cub->player.ang > 2 * M_PI) //to reset  to 0
+        cub->var_d.new_angle -= 2 * M_PI;
+    else if (cub->player.ang  < 0)
+        cub->var_d.new_angle += 2 * M_PI;
 }
+
 int	mouvements(int key, t_all *cub)
 {
-    //x is y and y is x
     printf("x: %f | y : %f\n", cub->player.x , cub->player.y);
 	if (key == RIGHT || key == LEFT)
 		event_left_right(cub, key);
@@ -100,14 +86,10 @@ int	mouvements(int key, t_all *cub)
 		exit_program(cub);
     else
         rotate_player(key, cub);
-	// else if (key == 53)
-	// 	exit_program(cub);
-	// mlx_clear_window(cub->mlx, cub->mlx_win);
     draw_minimap(cub);
     big_circle(cub);
     make_rays(cub);
     dda(cub);
-    // dda2(cub);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/25 13:29:43 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/28 11:03:18 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 #include <math.h>
 #include <stdio.h>
 #include "parsing/cub3d.h"
+#include <math.h>
 
 #define CUBE  60 // the cube dimension
 #define W_M 10 //map width
 #define H_M 7 //map height
-#define VIEW  40 //length of ray
+#define VIEW  100 //length of ray
 #define FEILD 60 * (M_PI / 180) //convert in RAD
 #define NUM_RAYS (W_M * CUBE) //
+
 
 #define UP  13
 #define DOWN 1
@@ -45,12 +47,13 @@ typedef struct s_player
     double walk_direction;
     double rotation_speed;
     double view;
+  
     
 }t_player;
 
 typedef struct s_ddavar
 {
-    double x1;
+    double x1; // the x pos of the ray
     double y1;
     double xx1;
     double yy1;
@@ -60,6 +63,22 @@ typedef struct s_ddavar
     double  new_angle;
     double dx;
     double dy;
+ 
+    //intersection
+
+    int xsteps;
+    int ysteps;
+    int xinter;
+    int yinter;
+    int is_down; 
+    int is_up;// is facing dow
+    int is_right;
+    int is_left;
+    //
+    double wallhitx;
+    double wallhity;
+    double distance;
+    
 
 } t_ddavar;
 
@@ -76,6 +95,7 @@ typedef struct s_cub
     int map_h;
     t_player player;
     char **walls;
+
     t_ddavar var_d;
 
     //for the minimap
@@ -112,7 +132,11 @@ void init2(t_all *cub);
 void make_rays(t_all *cub);
 
 void draw_grid(t_all *cub, int grid, int fill);
-
+void what_direction(t_all *cub);
+void fix_angle(t_all *cub);
+void is_down(t_all *cub);
+void is_up(t_all *cub);
+void is_left(t_all *cub);
 /*Cub3d outils*/
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
