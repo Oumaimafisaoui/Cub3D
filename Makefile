@@ -9,7 +9,8 @@ SRC =  	main.c cub3d_outils.c draw_minimap.c init.c move_player.c dda.c check_wa
 		parsing/libft/ft_memcpy.c \
 		parsing/get_next_line/get_next_line.c \
 		parsing/get_next_line/get_next_utils.c \
-		parsing/utils.c
+		parsing/utils.c \
+		ray_tools.c
 
 OBJ = ${SRC:.c=.o}
 NAME = cub

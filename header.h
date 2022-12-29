@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/28 13:19:36 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:21:02 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,17 @@ typedef struct s_ddavar
     double wallhity;
     double distance;
     int h_found_wall;
+
+
+    int xsteps1;
+    int ysteps1;
+    int xinter1;
+    int yinter1;
+
+    double wallhitx1;
+    double wallhity1;
+    double distance1;
+    int v_found_wall;
     
 
 } t_ddavar;
@@ -139,6 +150,10 @@ void is_down(t_all *cub);
 void is_up(t_all *cub);
 void is_left(t_all *cub);
 void what_direction1(t_all *cub);
+void is_right(t_all *cub);
+void is_left(t_all *cub);
+void is_up2(t_all *cub);
+void is_left2(t_all *cub);
 /*Cub3d outils*/
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);

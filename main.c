@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:37 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/24 19:30:22 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 09:20:46 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int ac, char **av)
     if (ac != 2)
 	{
 		printf("Error Args !!!\n");
-		exit(1); 
+		exit(1);
 	}
 	if (ft_check_file_map(av) == 1)
 	{

@@ -6,20 +6,20 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:58:11 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/25 18:02:13 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 16:55:01 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "header.h"
 
-void	my_mlx_pixel_put(t_all *cub, int x, int y, int color)
-{
-	char	*dst;
+// void	my_mlx_pixel_put(t_all *cub, int x, int y, int color)
+// {
+// 	char	*dst;
     
-	dst = cub->addr + (y * cub->line_length + x * (cub->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
+// 	dst = cub->addr + (y * cub->line_length + x * (cub->bits_per_pixel / 8));
+// 	*(unsigned int*)dst = color;
+// }
 
 void	my_mlx_pixel_put2(t_all *cub, int x, int y, int color)
 {
@@ -66,9 +66,9 @@ void draw_grid(t_all *cub, int grid, int fill)
         while (cub->map_x < (cub->map_j * CUBE) + CUBE)
         {
             if (cub->map_y % CUBE == 0 || cub->map_x % CUBE == 0) //put black line
-                my_mlx_pixel_put(cub, cub->map_x, cub->map_y, grid);
+                my_mlx_pixel_put2(cub, cub->map_x, cub->map_y, grid);
             else
-                my_mlx_pixel_put(cub, cub->map_x, cub->map_y, fill);
+                my_mlx_pixel_put2(cub, cub->map_x, cub->map_y, fill);
             cub->map_x++;
         }
         cub->map_y++;
@@ -139,7 +139,7 @@ void big_circle(t_all *cub)
     double xp;
     double yp;
 
-    my_mlx_pixel_put(cub, cub->player.x, cub->player.y, 0x00FFFFFF);
+    my_mlx_pixel_put2(cub, cub->player.x, cub->player.y, 0x00FFFFFF);
     //x = cos(o) * h + xs
     //y = sin(o) * h + ys
     h = 1;
@@ -150,7 +150,7 @@ void big_circle(t_all *cub)
         {
             xp = cos(angle) * h + cub->player.x;
             yp = sin(angle) * h + cub->player.y;
-            my_mlx_pixel_put(cub, xp, yp, 0x00FFFFFF);
+            my_mlx_pixel_put2(cub, xp, yp, 0x00FFFFFF);
             angle++;
         }
         h++;
