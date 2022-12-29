@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:27:59 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/29 16:57:14 by oufisaou         ###   ########.fr       */
+/*   Updated: 2022/12/29 20:17:36 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ void event_up_down(t_all *cub, int key)
 
 void rotate_player(int key, t_all *cub)
 {
-    if (cub->player.ang > 2 * M_PI) //to reset  to 0
-        cub->var_d.new_angle -= 2 * M_PI;
-    if (cub->player.ang  < 0)
-        cub->var_d.new_angle += 2 * M_PI;
+    // if (cub->player.ang > 2 * M_PI) //to reset  to 0
+    //     cub->var_d.new_angle -= 2 * M_PI;
+    // if (cub->player.ang  < 0)
+    //     cub->var_d.new_angle += 2 * M_PI;
     if(key == 35)
     {
         cub->player.ang -= cub->player.rotation_speed;
