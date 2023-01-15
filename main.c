@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:37 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/29 09:20:46 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:05:43 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int main(int ac, char **av)
     
     if (ac != 2)
 	{
-		printf("Error Args !!!\n");
+		ft_putstr_fd("Error Args !!!\n", 2);
 		exit(1);
 	}
 	if (ft_check_file_map(av) == 1)
 	{
-		printf("\033[0;31mextention of map must finished -> .cub !!\n");
+		ft_putstr_fd("\033[0;31mextention of map must finished -> .cub !!\n",2);
 		exit(1);
 	}
 	ft_read_map(&map, av);
@@ -33,7 +33,7 @@ int main(int ac, char **av)
 	retrun_map_2d(&map);
 	if (ft_check_all_map(map.map2d) == 1 || ft_check_content(&map) == 1 || ft_check_horizontal(&map) == 1 || ft_check_vertical(&map) == 1)
 	{
-		printf("error walls\n");
+		ft_putstr_fd("error walls\n", 2);
 		exit(EXIT_FAILURE);
 	}
     cub.walls = map.map2d;

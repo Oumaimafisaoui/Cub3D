@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/29 20:34:30 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:46:45 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void dda(t_all *cub)
             cub->var_d.yy1 = cub->var_d.yy1 + cub->var_d.yinc;
     }
 }
+
 /*
     this fuction draw a ray in finction of the parameters:
     @var_d.xinc : the x increment value
@@ -70,33 +71,42 @@ void dda2(t_all *cub)
 */
 void make_rays(t_all *cub)
 {
-    int  j =  -1;
+    int  j = -1;
 
     int xnext = 0;
     int ynext = 0;
+
     int xnext1 = 0;
     int ynext1 = 0;
+
     double d1 = 0;
     double d2 = 0;
-    
-    // if (cub->player.ang > 2 * M_PI) //to reset  to 0
-    //     cub->var_d.new_angle -= 2 * M_PI;
-    // if (cub->player.ang  < 0)
-    //     cub->var_d.new_angle += 2 * M_PI;
+
+    if (cub->player.ang > 2 * M_PI) //to reset  to 0
+        cub->player.ang -= 2 * M_PI;
+    if (cub->player.ang  < 0)
+        cub->player.ang += 2 * M_PI;
+
     cub->var_d.new_angle = cub->player.ang - (FEILD / 2);
 
     while(++j < NUM_RAYS)
-    {   
+    {
         fix_angle(cub);
         what_direction(cub);
-        printf("%f\n", cub->var_d.new_angle);
-        //Find the y and x horizental intersept
-        cub->var_d.yinter = round(cub->player.y / CUBE) * CUBE;
+        if (cub->var_d.is_down)
+            printf("down\t");
+        else
+            printf("up\t");
+        if (cub->var_d.is_left)
+            printf("left\n");
+        else
+            printf("right\n");
+        cub->var_d.yinter = floor(cub->player.y / CUBE) * CUBE;
         is_down(cub);
         cub->var_d.xinter = cub->player.x + (( cub->var_d.yinter - cub->player.y) / tan(cub->var_d.new_angle));
-        //get the xsteps adn the ysteps
         cub->var_d.ysteps = CUBE;
         is_up(cub);
+
         cub->var_d.xsteps = CUBE / tan(cub->var_d.new_angle);
         is_left(cub);
         
@@ -105,7 +115,7 @@ void make_rays(t_all *cub)
 
         if(cub->var_d.is_up == 1)
             ynext -= 1;
-
+    
         while(xnext >= 0 && xnext <= cub->map_w && ynext >= 0 && ynext <= cub->map_h)
         {
             if(cub->walls[ynext / CUBE][xnext / CUBE] == '1')
@@ -122,8 +132,6 @@ void make_rays(t_all *cub)
                 ynext += cub->var_d.ysteps;
             }
         }
-     
-        // fix_angle(cub);
         // what_direction(cub);
         cub->var_d.xinter1 = floor(cub->player.x / CUBE) * CUBE;
         is_right(cub);
@@ -184,8 +192,15 @@ void make_rays(t_all *cub)
             cub->var_d.steps = fabs(cub->var_d.dx);
         else
             cub->var_d.steps = fabs(cub->var_d.dy);
+        
         dda2(cub);
-        cub->var_d.new_angle += (FEILD / NUM_RAYS); 
+        cub->var_d.new_angle += (FEILD / (double) NUM_RAYS);
+        cub->var_d.is_down = 0;
+        cub->var_d.is_right = 0;
+        cub->var_d.is_up = 0;
+        cub->var_d.is_left = 0;
+
     }
+    // exit(1);
 }
 

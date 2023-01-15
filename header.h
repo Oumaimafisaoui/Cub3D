@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/29 11:21:02 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:35:53 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 #include "parsing/cub3d.h"
 #include <math.h>
 
-#define CUBE  60 // the cube dimension
+#define CUBE  30 // the cube dimension
 #define W_M 10 //map width
 #define H_M 7 //map height
 #define VIEW  100 //length of ray
-#define FEILD 60 * (M_PI / 180) //convert in RAD
+#define FEILD (60 * (M_PI / 180)) //convert in RAD
 #define NUM_RAYS (W_M * CUBE) //
 
 
@@ -127,11 +127,13 @@ typedef struct s_cub
 
 
 void init(t_all *cub);
+void init_suite(t_all *cub);
+
 void	ft_error(char *str);
 void launch_mlx(t_all *cub);
 void draw_minimap(t_all *cub);
 void	my_mlx_pixel_put(t_all *cub, int x, int y, int color);
-void put_player(t_all *cub);
+void get_player_coord(t_all *cub);
 int	mouvements(int key, t_all *cub);
 void dda(t_all *cub);
 void set_direction(t_all *cub);
@@ -155,8 +157,6 @@ void is_left(t_all *cub);
 void is_up2(t_all *cub);
 void is_left2(t_all *cub);
 /*Cub3d outils*/
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
 void dda2(t_all *cub);
-void big_circle(t_all *cub);
+void put_big_player_circle(t_all *cub);
 #endif

@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/29 10:03:07 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:34:38 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ void init(t_all *cub)
     cub->map_j = 0;
     cub->map_x = 0;
     cub->map_y = 0;
+    init_suite(cub);
+}
 
+
+void init_suite(t_all *cub)
+{
     cub->black = 0x00000000;
     cub->yellow = 0x00FFFF00;
     cub->red = 0x00FF3333;
@@ -101,7 +106,7 @@ void set_direction(t_all *cub)
 
 void launch_mlx(t_all *cub)
 {
-    cub->mlx = mlx_init();
+    cub->mlx = mlx_init(); //this 
     if (cub->mlx == NULL)
 		ft_error("mlx_init failed\n");
 	cub->mlx_win = mlx_new_window(cub->mlx, 1920, 1080, "Cub3D");
@@ -111,8 +116,8 @@ void launch_mlx(t_all *cub)
 	cub->addr = mlx_get_data_addr(cub->img, &cub->bits_per_pixel, &cub->line_length,
 								&cub->endian);
     draw_minimap(cub);
-    put_player(cub);
-    big_circle(cub);
+    get_player_coord(cub);
+   put_big_player_circle(cub);
     set_direction(cub);
     make_rays(cub);
     dda(cub);

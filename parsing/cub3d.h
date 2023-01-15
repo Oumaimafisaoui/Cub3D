@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 19:02:38 by skasmi            #+#    #+#             */
-/*   Updated: 2022/12/24 16:28:47 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 11:50:24 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,6 @@ char	*ft_line(char *str);
 char	*ft_read(char *str, int fd);
 char	*ft_rest(char *st);
 char	*ft_strjoin(char *s1, char *s2);
-
+void	ft_putchar_fd(char c, int fd);
+void	ft_putstr_fd(char *s, int fd);
 #endif

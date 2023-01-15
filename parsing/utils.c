@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/30 19:44:31 by skasmi            #+#    #+#             */
-/*   Updated: 2022/12/24 19:21:51 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 11:50:21 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_read_map(t_map *t, char **av)
 	t->fd = open(av[1], O_RDONLY);
 	if (t->fd < 0)
 	{
-		printf("\033[0;31mfile not found !!\n");
+		ft_putstr_fd("\033[0;31mfile not found !!\n", 2);
 		exit(1);		
 	}
 	t->tab = get_next_line(t->fd);
@@ -105,3 +105,22 @@ void	ft_read_map(t_map *t, char **av)
 	t->map2d[j] = NULL;
 }
 
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	index;
+
+	index = 0;
+	if (!s)
+		return ;
+	while (s[index])
+	{
+		ft_putchar_fd(s[index], fd);
+		index++;
+	}
+}
+
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}

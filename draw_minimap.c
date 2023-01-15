@@ -6,20 +6,11 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:58:11 by oufisaou          #+#    #+#             */
-/*   Updated: 2022/12/29 16:55:01 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:33:39 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "header.h"
-
-// void	my_mlx_pixel_put(t_all *cub, int x, int y, int color)
-// {
-// 	char	*dst;
-    
-// 	dst = cub->addr + (y * cub->line_length + x * (cub->bits_per_pixel / 8));
-// 	*(unsigned int*)dst = color;
-// }
 
 void	my_mlx_pixel_put2(t_all *cub, int x, int y, int color)
 {
@@ -27,41 +18,14 @@ void	my_mlx_pixel_put2(t_all *cub, int x, int y, int color)
     
     if ((x >= 0 && x < cub->map_w) && (y >= 0 && y < cub->map_h))
     {
-        dst = cub->addr + (y * cub->line_length + x * (cub->bits_per_pixel / 8));
+        dst = cub->addr + ((y * cub->line_length) + (x * (cub->bits_per_pixel / 8)));
         *(unsigned int*)dst = color;
     }
 }
 
-/*
-    This function uses
-    @i : ittertate through themap height / CUBE dimension to have equal squares.
-    @j : itterate through the map width / CUBE dimension to have equal squares.
-    @y : the position of the y starting point of the square : 0 , 60 , 90, 120...
-    @x:  the position of the x starting point of the square
-    if (x, y) = '1'
-
-    1 - itterate through : y = (i * CUBE) + CUBE
-    2 - itterate through : x = (j * CUBE) + CUBE
-
-    y = 0 => (x =0 ............. x = 60)
-
-        x= 0    60    90
-    y = 0---------------------------------------
-           1|   1 |   1  |   1  |   1  |  1   |   1  |
-    y = 60---------------------------------------
-            1|   0 |   0  |  0   |   0  |   0  |   0  |
-    y = 90---------------------------------------
-
-    i = 0, j = 0
-    Round one => (y=0 , (x= 0 .......... x = 60))
-    (y = 0 => y < 60)
-    (x = 0 = >  x < 60)
-    the step is 60 and the pixel is one.
-*/
-
 void draw_grid(t_all *cub, int grid, int fill)
 {
-    cub->map_x = cub->map_j * CUBE;
+        cub->map_x = cub->map_j * CUBE;
 
         while (cub->map_x < (cub->map_j * CUBE) + CUBE)
         {
@@ -74,6 +38,7 @@ void draw_grid(t_all *cub, int grid, int fill)
         cub->map_y++;
     
 }
+
 void draw_minimap(t_all *cub)
 {
     
@@ -111,11 +76,12 @@ void draw_minimap(t_all *cub)
 }
 
 
-void put_player(t_all *cub)
+void get_player_coord(t_all *cub)
 {
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
 
+    i = 0;
     while(i < cub->map_h / CUBE)
     {
         j = 0;
@@ -132,12 +98,12 @@ void put_player(t_all *cub)
     } 
 }
 
-void big_circle(t_all *cub)
+void put_big_player_circle(t_all *cub)
 {
     double h;
     double angle;
-    double xp;
-    double yp;
+    double x_big;
+    double y_big;
 
     my_mlx_pixel_put2(cub, cub->player.x, cub->player.y, 0x00FFFFFF);
     //x = cos(o) * h + xs
@@ -148,13 +114,14 @@ void big_circle(t_all *cub)
         angle = 0;
         while(angle < 360)
         {
-            xp = cos(angle) * h + cub->player.x;
-            yp = sin(angle) * h + cub->player.y;
-            my_mlx_pixel_put2(cub, xp, yp, 0x00FFFFFF);
+            x_big = cos(angle) * h + cub->player.x;
+            y_big = sin(angle) * h + cub->player.y;
+            my_mlx_pixel_put2(cub, x_big, y_big, 0x00FFFFFF);
             angle++;
         }
         h++;
     }
+    return ;    
 }
 
 
