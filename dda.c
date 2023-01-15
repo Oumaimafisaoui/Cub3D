@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/15 15:46:45 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:50:37 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,16 @@ void make_rays(t_all *cub)
 
     while(++j < NUM_RAYS)
     {
+        if (cub->var_d.new_angle > 2 * M_PI) //to reset  to 0
+        cub->var_d.new_angle -= 2 * M_PI;
+        if (cub->var_d.new_angle  < 0)
+            cub->var_d.new_angle += 2 * M_PI;
+
+        
+        if (cub->player.ang > 2 * M_PI) //to reset  to 0
+            cub->player.ang -= 2 * M_PI;
+        if (cub->player.ang  < 0)
+            cub->player.ang += 2 * M_PI;
         fix_angle(cub);
         what_direction(cub);
         if (cub->var_d.is_down)
@@ -195,6 +205,17 @@ void make_rays(t_all *cub)
         
         dda2(cub);
         cub->var_d.new_angle += (FEILD / (double) NUM_RAYS);
+         if (cub->var_d.new_angle > 2 * M_PI) //to reset  to 0
+        cub->var_d.new_angle -= 2 * M_PI;
+        if (cub->var_d.new_angle  < 0)
+            cub->var_d.new_angle += 2 * M_PI;
+
+
+
+    if (cub->player.ang > 2 * M_PI) //to reset  to 0
+        cub->player.ang -= 2 * M_PI;
+    if (cub->player.ang  < 0)
+        cub->player.ang += 2 * M_PI;
         cub->var_d.is_down = 0;
         cub->var_d.is_right = 0;
         cub->var_d.is_up = 0;
