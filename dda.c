@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/15 16:28:11 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 16:42:26 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,31 +17,6 @@
     this function calclates the position of the end of the ray,
     This is the function for the red line
 */
-void dda(t_all *cub)
-{
-    //why pi / 2 looks down : becaue they go in the way of the horloge in game development
-    //ihdatiyat dial no9ta
-    cub->var_d.x1 = cub->player.x + (cos(cub->player.ang) * VIEW);
-    cub->var_d.y1 = cub->player.y + (sin(cub->player.ang) * VIEW);
-
-    cub->var_d.xx1  = cub->player.x;
-    cub->var_d.yy1 = cub->player.y;
-
-    if(fabs(cub->var_d.x1 - cub->player.x) > fabs(cub->var_d.y1 -  cub->player.y))
-        cub->var_d.steps = fabs(cub->var_d.x1 - cub->player.x);
-    else
-        cub->var_d.steps = fabs(cub->var_d.y1 - cub->player.y);
-
-    cub->var_d.xinc = (cub->var_d.x1 - cub->player.x) / cub->var_d.steps;
-    cub->var_d.yinc = (cub->var_d.y1 - cub->player.y) / cub->var_d.steps;
-
-    for(double i = 0; i < cub->var_d.steps; i++)
-    {
-            my_mlx_pixel_put2(cub, cub->var_d.xx1 , cub->var_d.yy1, 0x00FF0000);
-            cub->var_d.xx1 = cub->var_d.xx1 + cub->var_d.xinc;
-            cub->var_d.yy1 = cub->var_d.yy1 + cub->var_d.yinc;
-    }
-}
 
 /*
     this fuction draw a ray in finction of the parameters:
@@ -154,13 +129,10 @@ void horizontal_inter(t_all *cub)
     is_up(cub);
     cub->var_d.xsteps = CUBE / tan(cub->var_d.new_angle);
     is_left(cub);
-    
     cub->var_d.next_x_inter = cub->var_d.xinter;
     cub->var_d.next_y_inter = cub->var_d.yinter;
-
     if(cub->var_d.is_up == 1)
         cub->var_d.next_y_inter -= 1;
-
     while(cub->var_d.next_x_inter >= 0 && cub->var_d.next_x_inter <= cub->map_w \
     && cub->var_d.next_y_inter >= 0 && cub->var_d.next_y_inter <= cub->map_h)
     {
@@ -169,7 +141,6 @@ void horizontal_inter(t_all *cub)
             cub->var_d.h_found_wall = 1;
             cub->var_d.wallhitx = cub->var_d.next_x_inter;
             cub->var_d.wallhity = cub->var_d.next_y_inter;
-            
             break ;
         }
         else
@@ -205,8 +176,7 @@ void vertical_inter(t_all *cub)
         {
             cub->var_d.v_found_wall = 1;
             cub->var_d.wallhitx1 = cub->var_d.next_x_inter1;
-            cub->var_d.wallhity1 = cub->var_d.next_y_inter1 ;
-            
+            cub->var_d.wallhity1 = cub->var_d.next_y_inter1;
             break ;
         }
         else

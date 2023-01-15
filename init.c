@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/15 16:21:38 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 16:41:50 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,9 @@ void launch_mlx(t_all *cub)
 								&cub->endian);
     draw_minimap(cub);
     get_player_coord(cub);
-   put_big_player_circle(cub);
+    put_big_player_circle(cub);
     set_direction(cub);
     make_rays(cub);
-    // dda(cub);
     mlx_hook(cub->mlx_win, 2, 1L<<0 , mouvements, cub);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);
     mlx_hook(cub->mlx_win, 17, 0, exit_program, cub);
