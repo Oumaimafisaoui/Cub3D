@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/15 15:35:53 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/15 16:24:11 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,12 @@ typedef struct s_ddavar
     int xinter1;
     int yinter1;
 
+    int next_x_inter;
+    int next_y_inter;
+
+    int next_x_inter1;
+    int next_y_inter1;
+
     double wallhitx1;
     double wallhity1;
     double distance1;
@@ -156,7 +162,13 @@ void is_right(t_all *cub);
 void is_left(t_all *cub);
 void is_up2(t_all *cub);
 void is_left2(t_all *cub);
+void normalize_player(t_all *cub);
+void normalize_rayangle(t_all *cub);
+void reset_directions(t_all *cub);
+void decide_casting(t_all *cub);
+void vertical_inter(t_all *cub);
 /*Cub3d outils*/
 void dda2(t_all *cub);
 void put_big_player_circle(t_all *cub);
+void horizontal_inter(t_all *cub);
 #endif
