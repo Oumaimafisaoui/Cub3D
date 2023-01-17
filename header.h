@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/17 17:21:49 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:54:04 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "parsing/cub3d.h"
 #include <math.h>
 
-#define CUBE  80 // the cube dimension
+#define CUBE 100 // the cube dimension
 // #define W_M 10 //map width
 // #define H_M 7 //map height
 #define VIEW  100 //length of ray

@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:39:22 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/17 18:28:18 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:42:30 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,10 @@ void dda2(t_all *cub)
     i = 0;
     cub->var_d.xinc = (cub->var_d.dx) / cub->var_d.steps;
     cub->var_d.yinc = (cub->var_d.dy) / cub->var_d.steps;
-    printf("xx = %f\t%f\n", cub->var_d.xinc , cub->var_d.yinc);
+    // printf("xx = %f\t%f\n", cub->var_d.xinc , cub->var_d.yinc);
     while(i <= cub->var_d.steps)
     {
-        my_mlx_pixel_put2(cub, cub->var_d.xx1 , cub->var_d.yy1, 0x0000CC00);
+        my_mlx_pixel_put2(cub, round(cub->var_d.xx1) , round(cub->var_d.yy1), 0x0000CC00);
         cub->var_d.xx1 += cub->var_d.xinc;
         cub->var_d.yy1 += cub->var_d.yinc;
         i++;
@@ -76,10 +76,10 @@ void dda2(t_all *cub)
     if (i != 0)
     {
         ++how_many;
-        printf("omoormedobuta\n");
+        // printf("omoormedobuta\n");
 
     }
-    printf("how = %d\n", how_many);
+    // printf("how = %d\n", how_many);
 }
 
 void normalize_player(t_all *cub)
@@ -119,7 +119,7 @@ void make_rays(t_all *cub)
     cub->var_d.num_rays = width;
     cub->var_d.new_angle = angle - (FEILD / 2);
     normalize_rayangle(cub);
-
+    printf("width: %lf\n", cub->map_w);
     while(j < cub->var_d.num_rays)  //NUMRAYS IS ACTUALYY MAP_W
     {
         printf("-->%f\n", cub->var_d.new_angle);
@@ -130,6 +130,7 @@ void make_rays(t_all *cub)
             reset_directions(cub);
             normalize_rayangle(cub);
             cub->var_d.new_angle += (FEILD / cub->var_d.num_rays);
+            // printf("hahowa : %lf\n", );
             normalize_rayangle(cub);
         j++;
     }
@@ -142,6 +143,14 @@ void reset_directions(t_all *cub)
     cub->var_d.is_right = 0;
     cub->var_d.is_up = 0;
     cub->var_d.is_left = 0;
+    cub->var_d.x1 = 0;
+    cub->var_d.y1 = 0;
+    cub->var_d.wallhitx = 0;
+    cub->var_d.wallhity = 0;
+    cub->var_d.wallhitx1 = 0;
+    cub->var_d.wallhity1 = 0;
+    cub->var_d.h_found_wall = 0;
+    cub->var_d.v_found_wall = 0;
 }
 
 void decide_casting(t_all *cub)
@@ -150,30 +159,47 @@ void decide_casting(t_all *cub)
         double d2 = 0;
 
         // static int x = 0;
-        d1 = sqrt(pow(cub->var_d.wallhitx - cub->player.x, 2) + pow(cub->var_d.wallhity - cub->player.y, 2));
-        d2 = sqrt(pow(cub->var_d.wallhitx1 - cub->player.x, 2) + pow(cub->var_d.wallhity1 - cub->player.y, 2));
+        // d1 = sqrt(((cub->var_d.wallhitx - cub->player.x) * (cub->var_d.wallhitx - cub->player.x))  + ((cub->var_d.wallhity - cub->player.y) * (cub->var_d.wallhity - cub->player.y)));
+        // d2 = sqrt(((cub->var_d.wallhitx1 - cub->player.x) * (cub->var_d.wallhitx1 - cub->player.x))  + ((cub->var_d.wallhity1 - cub->player.y) * (cub->var_d.wallhity1 - cub->player.y)));
+        d1 = hypot(cub->var_d.wallhitx - cub->player.x, cub->var_d.wallhity - cub->player.y);
+        d2 = hypot(cub->var_d.wallhitx1 - cub->player.x, cub->var_d.wallhity1 - cub->player.y);
         // if (!d1 && !d2)
         // {
         //     printf("impossible\n");
         //     exit(1);
         // }
         printf("hori %f vertical  %f\n", d1, d2);
-        if(d1 < d2)
+        printf("horizontal ta3 nam: %lf\t%lf\n", cub->var_d.wallhitx, cub->var_d.wallhity);
+        printf("vertical ta3 nam: %lf\t%lf\n", cub->var_d.wallhitx1, cub->var_d.wallhity1);
+        if (cub->var_d.h_found_wall && cub->var_d.v_found_wall)
         {
-            cub->var_d.x1 = cub->var_d.wallhitx;
-            cub->var_d.y1 = cub->var_d.wallhity;
-        
+            if(d1 <= d2)
+            {
+                cub->var_d.x1 = cub->var_d.wallhitx;
+                cub->var_d.y1 = cub->var_d.wallhity;
+            
+            }
+            else
+            {
+                cub->var_d.x1 = cub->var_d.wallhitx1;
+                cub->var_d.y1 = cub->var_d.wallhity1;
+            }
         }
-        else
+        else if (cub->var_d.h_found_wall)
         {
-            cub->var_d.x1 = cub->var_d.wallhitx1;
-            cub->var_d.y1 = cub->var_d.wallhity1;
+                cub->var_d.x1 = cub->var_d.wallhitx;
+                cub->var_d.y1 = cub->var_d.wallhity;
+        }
+        else if (cub->var_d.v_found_wall)
+        {
+                cub->var_d.x1 = cub->var_d.wallhitx1;
+                cub->var_d.y1 = cub->var_d.wallhity1;
         }
         cub->var_d.xx1 = cub->player.x;
         cub->var_d.yy1 =  cub->player.y;
 
-        cub->var_d.dx = cub->var_d.x1 - cub->player.x;
-        cub->var_d.dy = cub->var_d.y1 - cub->player.y;
+        cub->var_d.dx = cub->var_d.x1 - cub->var_d.xx1;
+        cub->var_d.dy = cub->var_d.y1 - cub->var_d.yy1;
         if(fabs(cub->var_d.dx) > fabs(cub->var_d.dy))
             cub->var_d.steps = fabs(cub->var_d.dx);
         else
@@ -190,7 +216,7 @@ void horizontal_inter(t_all *cub)
     what_direction(cub);
     // printf(" up : %d\n  down:%d\n   left: %d\n right: %d\n", cub->var_d.is_up, cub->var_d.is_down, cub->var_d.is_left, cub->var_d.is_right);
     // printf("incrementation: %f\n new:%f\n", FEILD / 2, cub->var_d.new_angle);
-    cub->var_d.yinter = floor(cub->player.y / CUBE) * CUBE;
+    cub->var_d.yinter = floor(cub->player.y / CUBE) * (double)CUBE;
     is_down(cub);
     cub->var_d.xinter = cub->player.x + ((cub->var_d.yinter - cub->player.y) / tan(cub->var_d.new_angle));
     
@@ -205,8 +231,8 @@ void horizontal_inter(t_all *cub)
     // if(cub->var_d.is_up == 1)
     //     cub->var_d.next_y_inter -= 0.00000001;
         
-    while(cub->var_d.next_x_inter >= 0 && cub->var_d.next_x_inter <= cub->map_w \
-    && cub->var_d.next_y_inter >= 0 && cub->var_d.next_y_inter <= cub->map_h)
+    while(cub->var_d.next_x_inter >= 0 && cub->var_d.next_x_inter < cub->map_w \
+    && cub->var_d.next_y_inter >= 0 && cub->var_d.next_y_inter < cub->map_h)
     {
         if (cub->var_d.is_up == 1)
         {
@@ -219,7 +245,7 @@ void horizontal_inter(t_all *cub)
             }
 
         }
-        else if(cub->walls[(int)((cub->var_d.next_y_inter) / CUBE)][(int)(cub->var_d.next_x_inter / CUBE)] == '1')
+        if(cub->walls[(int)((cub->var_d.next_y_inter) / CUBE)][(int)(cub->var_d.next_x_inter / CUBE)] == '1')
         {
             cub->var_d.h_found_wall = 1;
             cub->var_d.wallhitx = cub->var_d.next_x_inter;
@@ -243,7 +269,7 @@ void normalize_and_direction(t_all *cub)
 
 void vertical_inter(t_all *cub)
 {
-    normalize_rayangle(cub);
+    // normalize_rayangle(cub);
     // if (cub->var_d.new_angle == M_PI / 2 || cub->var_d.new_angle == 3 * M_PI / 2)
     // {
     //     puts("hello");
@@ -251,7 +277,7 @@ void vertical_inter(t_all *cub)
     // }
     what_direction(cub);
 
-    cub->var_d.xinter1 = floor(cub->player.x / CUBE) * CUBE;
+    cub->var_d.xinter1 = floor(cub->player.x / CUBE) * (double)CUBE;
     is_right(cub);
     cub->var_d.yinter1 = cub->player.y + ((cub->var_d.xinter1 - cub->player.x) * tan(cub->var_d.new_angle));
     cub->var_d.xsteps1 = CUBE;
@@ -280,7 +306,7 @@ void vertical_inter(t_all *cub)
             }
 
         }
-        else if(cub->walls[(int)(cub->var_d.next_y_inter1 / CUBE)][(int)(cub->var_d.next_x_inter1 / CUBE)] == '1')
+        if(cub->walls[(int)(cub->var_d.next_y_inter1 / CUBE)][(int)(cub->var_d.next_x_inter1 / CUBE)] == '1')
         {
                 cub->var_d.v_found_wall = 1;
                 cub->var_d.wallhitx1 = cub->var_d.next_x_inter1;
