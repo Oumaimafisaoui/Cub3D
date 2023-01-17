@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:57:34 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/15 16:41:50 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:38:00 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void init(t_all *cub)
     cub->map_j = 0;
     cub->map_x = 0;
     cub->map_y = 0;
+    cub->var_d.num_rays = 0;
     init_suite(cub);
 }
 
@@ -88,26 +89,29 @@ void init_suite(t_all *cub)
 
 void set_direction(t_all *cub)
 {
-    int i = 0;
-    int j = 0;
+    int i;
+    int j;
 
+    i = 0;
 	while(i < cub->map_h / CUBE) // i will itterate on 7 height
     {
         j = 0;
         while(j < cub->map_w / CUBE) // j will itterate on 10 width
         {
-            if (cub->walls[i][j] == 'N')
-                cub->player.ang = (3 * M_PI) / 2; 
-            else if(cub->walls[i][j] == 'S')
-                cub->player.ang = M_PI / 2;
-            else if(cub->walls[i][j] == 'E')
-                cub->player.ang = M_PI;
-            else if(cub->walls[i][j] == 'W')
-                cub->player.ang = 0;
+            // if (cub->walls[i][j] == 'N')
+            //     cub->player.ang = (3 * M_PI) / 2; 
+            // else if(cub->walls[i][j] == 'S')
+            //     cub->player.ang = M_PI / 2;
+            // else if(cub->walls[i][j] == 'E')
+            //     cub->player.ang = 0;
+            // else if(cub->walls[i][j] == 'W')
+            //     cub->player.ang = M_PI;
+            cub->player.ang = 0;
             j++;
         }
         i++;
     }
+    // normalize_player(cub);
 }
 
 void launch_mlx(t_all *cub)
@@ -125,7 +129,9 @@ void launch_mlx(t_all *cub)
     get_player_coord(cub);
     put_big_player_circle(cub);
     set_direction(cub);
+    // normalize_player(cub);
     make_rays(cub);
+    dda(cub);
     mlx_hook(cub->mlx_win, 2, 1L<<0 , mouvements, cub);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);
     mlx_hook(cub->mlx_win, 17, 0, exit_program, cub);

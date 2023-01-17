@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:27:59 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/15 15:47:59 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:54:14 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,6 @@ void event_up_down(t_all *cub, int key)
 
 void rotate_player(int key, t_all *cub)
 {
-     if (cub->player.ang > 2 * M_PI) //to reset  to 0
-        cub->player.ang -= 2 * M_PI;
-    if (cub->player.ang  < 0)
-        cub->player.ang += 2 * M_PI;
     if(key == 35)
     {
         cub->player.ang -= cub->player.rotation_speed;
@@ -73,15 +69,12 @@ void rotate_player(int key, t_all *cub)
     {
         cub->player.ang += cub->player.rotation_speed;
     }
-if (cub->player.ang > 2 * M_PI) //to reset  to 0
-        cub->player.ang -= 2 * M_PI;
-    if (cub->player.ang  < 0)
-        cub->player.ang += 2 * M_PI;
+    // normalize_player(cub);
 }
 
 int	mouvements(int key, t_all *cub)
 {
-    printf("x: %f | y : %f\n", cub->player.x , cub->player.y);
+    // printf("x: %f | y : %f\n", cub->player.x , cub->player.y);
 	if (key == RIGHT || key == LEFT)
 		event_left_right(cub, key);
 	else if (key == UP || key == DOWN)
@@ -90,10 +83,12 @@ int	mouvements(int key, t_all *cub)
 		exit_program(cub);
     else
         rotate_player(key, cub);
+    // normalize_player(cub);
     draw_minimap(cub);
     put_big_player_circle(cub);
     make_rays(cub);
-    // dda(cub);
+    dda(cub);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);
+    // normalize_player(cub);
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/15 16:24:11 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:21:49 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@
 #include "parsing/cub3d.h"
 #include <math.h>
 
-#define CUBE  30 // the cube dimension
-#define W_M 10 //map width
-#define H_M 7 //map height
+#define CUBE  80 // the cube dimension
+// #define W_M 10 //map width
+// #define H_M 7 //map height
 #define VIEW  100 //length of ray
 #define FEILD (60 * (M_PI / 180)) //convert in RAD
-#define NUM_RAYS (W_M * CUBE) //
+// #define NUM_RAYS (W_M * CUBE) //
 
 
 #define UP  13
@@ -59,17 +59,17 @@ typedef struct s_ddavar
     double yy1;
     double xinc;
     double yinc;
-    int steps;
+    double steps;
     double  new_angle;
     double dx;
     double dy;
  
     //intersection
 
-    int xsteps;
-    int ysteps;
-    int xinter;
-    int yinter;
+    double xsteps;
+    double ysteps;
+    double xinter;
+    double yinter;
     int is_down; 
     int is_up;// is facing dow
     int is_right;
@@ -81,22 +81,23 @@ typedef struct s_ddavar
     int h_found_wall;
 
 
-    int xsteps1;
-    int ysteps1;
-    int xinter1;
-    int yinter1;
+    double xsteps1;
+    double ysteps1;
+    double xinter1;
+    double yinter1;
 
-    int next_x_inter;
-    int next_y_inter;
+    double next_x_inter;
+    double next_y_inter;
 
-    int next_x_inter1;
-    int next_y_inter1;
+    double next_x_inter1;
+    double next_y_inter1;
 
     double wallhitx1;
     double wallhity1;
     double distance1;
     int v_found_wall;
     
+    double num_rays;
 
 } t_ddavar;
 
@@ -109,8 +110,8 @@ typedef struct s_cub
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-    int map_w;
-    int map_h;
+    double map_w;
+    double map_h;
     t_player player;
     char **walls;
 
@@ -167,6 +168,7 @@ void normalize_rayangle(t_all *cub);
 void reset_directions(t_all *cub);
 void decide_casting(t_all *cub);
 void vertical_inter(t_all *cub);
+void normalize_and_direction(t_all *cub);
 /*Cub3d outils*/
 void dda2(t_all *cub);
 void put_big_player_circle(t_all *cub);
