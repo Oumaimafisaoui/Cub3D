@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:58:11 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/17 17:13:17 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/22 13:40:41 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,12 @@ void draw_grid(t_all *cub, int grid, int fill)
 
 void draw_minimap(t_all *cub)
 {
-    
 	while(cub->map_i < cub->map_h / CUBE) // cub->map_i will itterate on 7 height
     {
         cub->map_j = 0;
         while(cub->map_j < cub->map_w / CUBE) // cub->map_j will itterate on 10 width
         {
             cub->map_y = cub->map_i * CUBE; 
-            // cub->map_y will be the height of the square
             if (cub->walls[cub->map_i][cub->map_j] == '1')
             {
                 while(cub->map_y < (cub->map_i * CUBE) + CUBE) //while the height is less than the end of the square  
@@ -68,14 +66,18 @@ void draw_minimap(t_all *cub)
         }
         cub->map_i++;
     }
-    cub->map_i = 0;
-    cub->map_j = 0;  //to prevent duplication
-    cub->map_x = 0;
-    cub->map_y = 0;
+    reset_variables(cub);
     return ;
 }
 
 
+void reset_variables(t_all *cub)
+{
+    cub->map_i = 0;
+    cub->map_j = 0;  //to prevent duplication
+    cub->map_x = 0;
+    cub->map_y = 0;
+}
 void get_player_coord(t_all *cub)
 {
     int i;

@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:27:59 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/17 16:54:14 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/22 13:44:48 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,18 @@ void event_left_right(t_all *cub, int key)
 	{
         if(!check_walls1(cub, 1))
         {
-            angle = cub->player.ang - (90 * (M_PI / 180));
-            cub->player.x -= (cos(angle) * cub->player.speed); //in case of North : x = x - (cos((3PI / 2- pI/2) * 3) = 330 - 4 = 226 
-            cub->player.y -= (sin(angle) * cub->player.speed); // 0 
+            angle = cub->player.ang + (90 * (M_PI / 180));
+            cub->player.x += (cos(angle) * cub->player.speed); //in case of North : x = x - (cos((3PI / 2- pI/2) * 3) = 330 - 4 = 226 
+            cub->player.y += (sin(angle) * cub->player.speed); // 0 
         }
 	}
 	if (key == LEFT) 
 	{
         if(!check_walls1(cub, 0))
         {
-            angle = cub->player.ang - (90 * (M_PI / 180));
-            cub->player.x += (cos(angle) * cub->player.speed);
-            cub->player.y += (sin(angle) * cub->player.speed); //y is fix
+            angle = cub->player.ang + (90 * (M_PI / 180));
+            cub->player.x -= (cos(angle) * cub->player.speed);
+            cub->player.y -= (sin(angle) * cub->player.speed); //y is fix
         }
     }
 }
@@ -69,7 +69,6 @@ void rotate_player(int key, t_all *cub)
     {
         cub->player.ang += cub->player.rotation_speed;
     }
-    // normalize_player(cub);
 }
 
 int	mouvements(int key, t_all *cub)
@@ -83,12 +82,10 @@ int	mouvements(int key, t_all *cub)
 		exit_program(cub);
     else
         rotate_player(key, cub);
-    // normalize_player(cub);
     draw_minimap(cub);
     put_big_player_circle(cub);
     make_rays(cub);
     dda(cub);
     mlx_put_image_to_window(cub->mlx, cub->mlx_win, cub->img, 0, 0);
-    // normalize_player(cub);
     return (1);
 }

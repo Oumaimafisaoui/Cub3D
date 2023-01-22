@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:18:49 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/17 18:54:04 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/22 13:44:36 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,13 @@
 #include "parsing/cub3d.h"
 #include <math.h>
 
-#define CUBE 100 // the cube dimension
-// #define W_M 10 //map width
-// #define H_M 7 //map height
-#define VIEW  100 //length of ray
-#define FEILD (60 * (M_PI / 180)) //convert in RAD
-// #define NUM_RAYS (W_M * CUBE) //
-
-
+#define CUBE 60 
+#define VIEW  100
+#define FEILD (60 * (M_PI / 180))
 #define UP  13
 #define DOWN 1
 #define RIGHT 2
 #define LEFT 0
-
 
 typedef struct s_player
 {
@@ -98,6 +92,8 @@ typedef struct s_ddavar
     int v_found_wall;
     
     double num_rays;
+    double distance_hor_wall;
+    double distance_ver_wall;
 
 } t_ddavar;
 
@@ -127,11 +123,6 @@ typedef struct s_cub
     int red;
     int purple;
 } t_all;
-
-//all walls should be removed and added to a struct
-
-/* Cub3d */
-
 
 void init(t_all *cub);
 void init_suite(t_all *cub);
@@ -169,7 +160,15 @@ void reset_directions(t_all *cub);
 void decide_casting(t_all *cub);
 void vertical_inter(t_all *cub);
 void normalize_and_direction(t_all *cub);
-/*Cub3d outils*/
+void end_decide_casting(t_all *cub);
+void begining_horizontal(t_all *cub);
+void begining_vertical(t_all *cub);
+void find_short_distance(t_all *cub);
+void init_suite1(t_all *cub);
+void init_suite0(t_all *cub);
+int find_wall(int x, int y, t_all *cub);
+void reset_variables(t_all *cub);
+
 void dda2(t_all *cub);
 void put_big_player_circle(t_all *cub);
 void horizontal_inter(t_all *cub);

@@ -6,7 +6,7 @@
 /*   By: oufisaou <oufisaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 11:26:29 by oufisaou          #+#    #+#             */
-/*   Updated: 2023/01/17 19:01:39 by oufisaou         ###   ########.fr       */
+/*   Updated: 2023/01/22 13:42:21 by oufisaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,13 @@
 void what_direction(t_all *cub)
 {
     if(cub->var_d.new_angle >= 0 && cub->var_d.new_angle <= M_PI)
-    {
         cub->var_d.is_down = 1;
-        printf("down\n");
-    }
     else if (cub->var_d.new_angle > M_PI && cub->var_d.new_angle < 2 * M_PI)
-    {
         cub->var_d.is_up = 1;
-                printf("up\n");
-    }
     if (cub->var_d.new_angle <= M_PI / 2.0 || cub->var_d.new_angle > 3.0 * M_PI / 2.0)
-    {
         cub->var_d.is_right = 1;
-        printf("right\n");
-    }
     else if (cub->var_d.new_angle >= M_PI / 2 && cub->var_d.new_angle < 3 * M_PI / 2)
-    {
         cub->var_d.is_left = 1;
-        printf("left\n");
-    }
         
 }
 
